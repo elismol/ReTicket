@@ -6,23 +6,28 @@ from django.contrib.auth import get_user_model
 from rest_framework.decorators import action
 from django.contrib.auth import authenticate, login
 
+"""
+This view set allows:
+- Creating new users
+- Listing existing users
+- Retrieving specific users by ID
+- Logging in as a user with email and password
+"""
+
 
 class UserViewSet(mixins.CreateModelMixin,
                   mixins.ListModelMixin,
                   mixins.RetrieveModelMixin,
                   viewsets.GenericViewSet):
-    """
-    This view set allows:
-    - Creating new users
-    - Listing existing users
-    - Retrieving specific users by ID
-    - Logging in as a user with username and password
-    """
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
 
     @action(detail=False, methods=["POST"], serializer_class=LoginSerializer)
     def login(self, request):
+        """
+        This view allows logging in via email and password.
+        It returns the serialized object of the user you logged in as.
+        """
         email = request.POST['email']
         password = request.POST['password']
         user = authenticate(request, email=email, password=password)
