@@ -5,6 +5,10 @@ from users.managers import UserManager
 
 
 class User(AbstractUser):
+    """
+    Here we override Django's default User model to use email as identifying field, an
+    disable the use of the `username` field.
+    """
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ["first_name", "last_name"]
     username = None

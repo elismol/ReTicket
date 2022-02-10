@@ -11,6 +11,13 @@ class UserViewSet(mixins.CreateModelMixin,
                   mixins.ListModelMixin,
                   mixins.RetrieveModelMixin,
                   viewsets.GenericViewSet):
+    """
+    This view set allows:
+    - Creating new users
+    - Listing existing users
+    - Retrieving specific users by ID
+    - Logging in as a user with username and password
+    """
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
 

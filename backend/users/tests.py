@@ -7,6 +7,11 @@ import json
 
 
 class CreateUserTest(APITestCase):
+    """
+    Test the endpoint for creating users.
+    """
+    # The URL to the create endpoint is the same as the URL to the list endpoint, and
+    # is called `user-list` by Django.
     uri = reverse("user-list")
 
     def test_can_create_valid_user(self):
@@ -42,12 +47,19 @@ class CreateUserTest(APITestCase):
 
 
 class TestUserLogin(APITestCase):
+    """
+    Tests the login endpoint for users.
+    """
     uri = reverse("user-login")
     password = "#et-vanskelig-passord-123"
     email = "non-unique-email@example.com"
     user: User
 
     def setUp(self) -> None:
+        """
+        The setUp method is run before each test, and creates a User object that can be
+        used in the tests.
+        """
         super().setUp()
         self.user = User(email=self.email)
         self.user.set_password(self.password)

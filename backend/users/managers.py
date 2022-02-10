@@ -2,6 +2,11 @@ from django.contrib.auth.base_user import BaseUserManager
 
 
 class UserManager(BaseUserManager):
+    """
+    Here we override the user manager, so that create_user and create_superuser work without
+    usernames.
+    """
+
     def create_user(self, email, password=None, first_name=None, last_name=None, **extra_fields):
         if not email:
             raise ValueError('Enter an email address')
