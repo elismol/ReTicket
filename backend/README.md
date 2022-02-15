@@ -2,9 +2,18 @@
 
 1. Set up virtual environment
     Make sure you are in the `backend` directory and run these commands:
+    
+    Mac:
     ```bash
     python3 -m virtualenv env
     source env/bin/activate
+    pip install -r requirements.txt
+    ```
+
+    Windows:
+    ```bash
+    python -m venv env
+    .\env\Scripts\activate
     pip install -r requirements.txt
     ```
 
