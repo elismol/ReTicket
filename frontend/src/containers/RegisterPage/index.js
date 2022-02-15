@@ -6,12 +6,12 @@ import {
   HStack,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
-import React, { useState } from "react";
+import React from "react";
 import * as Yup from "yup";
 import "./index.css";
-import axios from "axios";
 
 const validationSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
