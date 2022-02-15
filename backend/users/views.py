@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
-from users.serializers import UserSerializer, LoginSerializer
+from users.serializers import CreateUserSerializer, UserSerializer, LoginSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import action
 from django.contrib.auth import authenticate, login
@@ -21,6 +21,13 @@ class UserViewSet(mixins.CreateModelMixin,
                   viewsets.GenericViewSet):
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
+
+    def get_serializer_class(self):
+        # When creating new users, we want to use the serializer that includes password
+        if self.action == "create":
+            return CreateUserSerializer
+        # Otherwise, use the default
+        return self.serializer_class
 
     @action(detail=False, methods=["POST"], serializer_class=LoginSerializer)
     def login(self, request):

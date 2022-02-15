@@ -3,5 +3,8 @@
   "python.analysis.extraPaths": ["backend"],
   "python.formatting.provider": "autopep8",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  }
 }
