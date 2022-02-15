@@ -8,15 +8,15 @@ import {
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import "./index.css";
 import axios from "axios";
 
 const validationSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
-  firstName: Yup.string().required().label("First name"),
-  lastName: Yup.string().required().label("Last name"),
+  first_name: Yup.string().required().label("First name"),
+  last_name: Yup.string().required().label("Last name"),
   password: Yup.string().required().label("Password"),
   confirmPassword: Yup.string().when("password", {
     is: (val) => (val && val.length > 0 ? true : false),
@@ -29,15 +29,19 @@ const validationSchema = Yup.object({
 
 const RegisterUser = () => {
   const registerUser = React.useCallback((formValues) => {
-    axios.post("/users/", formValues);
-  });
+    return axios.post("/users/", formValues);
+  }, []);
 
   return (
     <Center width="100%" height="100vh">
       <Container>
         <Container paddingTop="1em">
           <Formik
-            onSubmit={(values, actions) => registerUser(values)}
+            onSubmit={(values, { setErrors, resetForm }) =>
+              registerUser(values).catch((error) =>
+                setErrors(error.response.data)
+              )
+            }
             initialValues={{}}
             validationSchema={validationSchema}
           >
@@ -76,7 +80,7 @@ const RegisterUser = () => {
                     <Box>
                       <InputControl
                         type="text"
-                        name="firstName"
+                        name="first_name"
                         placeholder="Ola"
                         required
                         label="First name"
@@ -85,7 +89,7 @@ const RegisterUser = () => {
                     <Box>
                       <InputControl
                         type="text"
-                        name="lastName"
+                        name="last_name"
                         placeholder="Nordmann"
                         required
                         label="Last name"
