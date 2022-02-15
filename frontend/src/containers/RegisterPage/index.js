@@ -1,22 +1,20 @@
-import "./index.css";
-import PropTypes from "prop-types";
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
+  Box,
   Center,
   Container,
+  FormControl,
+  FormHelperText,
   Heading,
-  Box,
-  VStack,
-  StackDivider,
   HStack,
-  Button,
+  Input,
+  VStack,
+  Divider,
 } from "@chakra-ui/react";
+import { Formik } from "formik";
+import { InputControl, SubmitButton } from "formik-chakra-ui";
+import "./index.css";
 
-function RegisterUser() {
+const RegisterUser = () => {
   return (
     <Center width="100%" height="100vh">
       <Container>
@@ -29,54 +27,80 @@ function RegisterUser() {
           </Heading>
         </Container>
         <Container paddingTop="1em">
-          <FormControl>
-            <VStack spacing={5} align="stretch">
-              <Box>
-                <FormLabel htmlFor="email">Email address</FormLabel>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="ola.nordmann@example.com"
-                />
-              </Box>
-              <HStack justifyContent="space-between" w="100%">
-                <Box>
-                  <FormLabel htmlFor="firstName">First name</FormLabel>
-                  <Input id="firstName" type="text" placeholder="Ola" />
-                </Box>
-                <Box>
-                  <FormLabel htmlFor="lastName">Last name</FormLabel>
-                  <Input id="lastName" type="text" placeholder="Nordmann" />
-                </Box>
-              </HStack>
-              <Box>
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Input
-                  id="password"
-                  type="password"
-                  autoComplete="new-password"
-                  placeholder="• • • • • • • •"
-                />
-                <FormHelperText>Create a new password.</FormHelperText>
-              </Box>
-              <Box>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  autoComplete="new-password"
-                  placeholder="• • • • • • • •"
-                />
-                <FormHelperText>Repeat your password.</FormHelperText>
-              </Box>
-              <Box textAlign="right">
-                <Button>Register user</Button>
-              </Box>
-            </VStack>
-          </FormControl>
+          <VStack spacing={5} align="stretch" divider={<Divider spacing={4} />}>
+            <Formik
+              onSubmit={(values, actions) => {
+                console.log(values);
+              }}
+              initialValues={{}}
+            >
+              {(props) => (
+                <>
+                  <Box>
+                    <InputControl
+                      type="email"
+                      name="email"
+                      placeholder="ola.nordmann@example.com"
+                      required
+                      label="Email address"
+                    />
+                  </Box>
+                  <HStack justifyContent="space-between" w="100%">
+                    <Box>
+                      <InputControl
+                        type="text"
+                        name="firstName"
+                        placeholder="Ola"
+                        required
+                        label="First name"
+                      />
+                    </Box>
+                    <Box>
+                      <InputControl
+                        type="text"
+                        name="lastName"
+                        placeholder="Nordmann"
+                        required
+                        label="Last name"
+                      />
+                    </Box>
+                  </HStack>
+                  <Box>
+                    <FormControl name="password" label="Password">
+                      <Input
+                        type="password"
+                        autoComplete="new-password"
+                        required
+                        placeholder="• • • • • • • •"
+                      />
+                      <FormHelperText>Create a new password.</FormHelperText>
+                    </FormControl>
+                  </Box>
+                  <Box>
+                    <InputControl
+                      type="password"
+                      name="confirmPassword"
+                      placeholder="• • • • • • • •"
+                      required
+                      helperText="Repeat your password."
+                    />
+                  </Box>
+                  <Box textAlign="right">
+                    <SubmitButton
+                      isLoading={props.isSubmitting}
+                      isDisabled={!props.isValid}
+                    >
+                      Register user
+                    </SubmitButton>
+                  </Box>
+                </>
+              )}
+            </Formik>
+          </VStack>
         </Container>
       </Container>
     </Center>
   );
-}
+};
 
 export default RegisterUser;
