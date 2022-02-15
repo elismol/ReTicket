@@ -2,20 +2,16 @@ import {
   Box,
   Center,
   Container,
-  FormControl,
-  FormHelperText,
   Heading,
   HStack,
-  Input,
   VStack,
-  Divider,
-  FormLabel,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
-import "./index.css";
-
+import React from "react";
 import * as Yup from "yup";
+import "./index.css";
+import axios from "axios";
 
 const validationSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
@@ -32,14 +28,16 @@ const validationSchema = Yup.object({
 });
 
 const RegisterUser = () => {
+  const registerUser = React.useCallback((formValues) => {
+    axios.post("/users/", formValues);
+  });
+
   return (
     <Center width="100%" height="100vh">
       <Container>
         <Container paddingTop="1em">
           <Formik
-            onSubmit={(values, actions) => {
-              console.log(values);
-            }}
+            onSubmit={(values, actions) => registerUser(values)}
             initialValues={{}}
             validationSchema={validationSchema}
           >
