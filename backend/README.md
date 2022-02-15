@@ -35,3 +35,9 @@
 
 The server should now be running at http://localhost:8000.
 To see the admin panel go to http://localhost:8000/admin/.
+
+### Run and test automatically
+It is possible to automatically run and test the backend in VSCode (after completing the steps above):
+- In VSCode, go to the tab Run and Debug. 
+- Press the green "play" button at the top of the Run and Debug menu.
+
