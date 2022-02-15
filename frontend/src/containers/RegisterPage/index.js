@@ -12,6 +12,7 @@ import { InputControl, SubmitButton } from "formik-chakra-ui";
 import React from "react";
 import * as Yup from "yup";
 import "./index.css";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
@@ -28,19 +29,24 @@ const validationSchema = Yup.object({
 });
 
 const RegisterUser = () => {
-  const registerUser = React.useCallback((formValues) => {
-    return axios.post("/users/", formValues);
-  }, []);
-
+  const navigate = useNavigate();
   return (
     <Center width="100%" height="100vh">
       <Container>
         <Container paddingTop="1em">
           <Formik
             onSubmit={(values, { setErrors, resetForm }) =>
-              registerUser(values).catch((error) =>
-                setErrors(error.response.data)
-              )
+              axios
+                .post("/users/", values)
+                .then(() =>
+                  axios
+                    .post("/users/login/", {
+                      email: values.email,
+                      password: values.password,
+                    })
+                    .catch(() => navigate("/"))
+                )
+                .catch((error) => setErrors(error.response.data))
             }
             initialValues={{}}
             validationSchema={validationSchema}
@@ -65,8 +71,6 @@ const RegisterUser = () => {
                       Please enter email and password to create a user.
                     </Heading>
                   </Box>
-                  {/* <pre>{JSON.stringify(props, null, 4)}</pre> */}
-                  {console.log(props)}
                   <Box>
                     <InputControl
                       type="email"

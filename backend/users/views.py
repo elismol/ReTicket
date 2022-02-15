@@ -35,8 +35,8 @@ class UserViewSet(mixins.CreateModelMixin,
         This view allows logging in via email and password.
         It returns the serialized object of the user you logged in as.
         """
-        email = request.POST['email']
-        password = request.POST['password']
+        email = request.POST.get("email") or request.data.get("email")
+        password = request.POST.get("password") or request.data.get("password")
         user = authenticate(request, email=email, password=password)
         if user is not None:
             # Create a session, and return the user object.
