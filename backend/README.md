@@ -15,8 +15,9 @@
 
 3. Create a super user
     ```bash
-    python manage.py createsuperuser --email admin@example.com --username admin
+    python manage.py createsuperuser
     ```
+    **NB**: When you type your password, it might look like nothing is happening, but it is.
 
 4. Start the server
     ```bash
