@@ -1,26 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import RegisterPage from "./containers/RegisterPage";
+import { ChakraProvider } from "@chakra-ui/react";
+import axios from "axios"
+
+axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.headers.post["Content-Type"] = "application/json";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>    
+    <ChakraProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route
+            path="/"
+            element={
+              <div>
+                <Link to="/register">Registrer bruker</Link>
+              </div>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </ChakraProvider>
   );
-
 }
 
 export default App;
