@@ -15,6 +15,16 @@
       "preLaunchTask": "Migrate"
     },
     {
+      "name": "Windows Django: Start",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\backend\\manage.py",
+      "args": ["runserver"],
+      "django": true,
+      "cwd": "${workspaceFolder}\\backend",
+      "preLaunchTask": "Migrate Windows"
+    },
+    {
       "name": "Django: Run tests",
       "type": "python",
       "request": "launch",
@@ -22,6 +32,15 @@
       "args": ["test"],
       "django": true,
       "cwd": "${workspaceFolder}/backend"
+    },
+    {
+      "name": "Windows Django: Run tests",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\backend\\manage.py",
+      "args": ["test"],
+      "django": true,
+      "cwd": "${workspaceFolder}\\backend"
     }
   ]
 }

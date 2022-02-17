@@ -12,6 +12,11 @@
       "label": "Make migrations",
       "type": "shell",
       "command": "${workspaceFolder}/backend/env/bin/python ${workspaceFolder}/backend/manage.py makemigrations"
+    },
+    {
+      "label": "Migrate Windows",
+      "type": "shell",
+      "command": "python ${workspaceFolder}\\backend\\manage.py migrate"
     }
   ]
 }
