@@ -14,22 +14,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/register" element={<RegisterPage />} />
-          <Route
-            path="/"
-            element={
-              <div>
-                <Link to="/register">Register new user</Link>
-              </div>
-            }
-          />
-        </Routes>
-        <Routes>
           <Route path="/users/login" element={<LoginPage />} />
           <Route
             path="/"
             element={
               <div>
-                <Link to="/users/login">Login</Link>
+                <Link to="/register">Register new user</Link>
               </div>
             }
           />
