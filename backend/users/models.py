@@ -15,4 +15,3 @@ class User(AbstractUser):
     objects = UserManager()
 
     email = models.EmailField(_('email address'), unique=True)
-

@@ -3,22 +3,22 @@ from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     """
     This serializer is used when getting user objects.
     """
     class Meta:
         model = User
-        fields = ['url', 'first_name', 'last_name', 'email']
+        fields = ['id', 'first_name', 'last_name', 'email']
 
 
-class CreateUserSerializer(serializers.HyperlinkedModelSerializer):
+class CreateUserSerializer(serializers.ModelSerializer):
     """
     This serializer is used when creating user objects.
     """
     class Meta:
         model = User
-        fields = ['url', 'first_name', 'last_name', 'email', 'password']
+        fields = ['id', 'first_name', 'last_name', 'email', 'password']
 
     # The password needs to be hashed, so we need to override the field
     password = serializers.CharField(
@@ -35,7 +35,7 @@ class CreateUserSerializer(serializers.HyperlinkedModelSerializer):
         return super().create(validated_data)
 
 
-class LoginSerializer(serializers.HyperlinkedModelSerializer):
+class LoginSerializer(serializers.ModelSerializer):
     """
     This serializer is used for login.
     """
