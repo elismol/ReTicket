@@ -21,15 +21,11 @@ const LogIn = () => {
           <Formik
             onSubmit={(values, { setErrors, resetForm }) =>
               axios
-                .post("/users/", values)
-                .then(() =>
-                  axios
-                    .post("/users/login/", {
-                      email: values.email,
-                      password: values.password,
-                    })
-                    .catch(() => navigate("/"))
-                )
+                .post("/users/login/", {
+                  email: values.email,
+                  password: values.password,
+                })
+                .catch(() => navigate("/"))
                 .catch((error) => setErrors(error.response.data))
             }
             initialValues={{}}
