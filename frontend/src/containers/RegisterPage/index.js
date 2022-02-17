@@ -36,16 +36,20 @@ const RegisterUser = () => {
         <Container paddingTop="1em">
           <Formik
             onSubmit={(values, { setErrors, resetForm }) =>
+              // Post to /users/ to create a new user
               axios
                 .post("/users/", values)
                 .then(() =>
+                  // Post to /users/login/ to automatically log in the new user
                   axios
                     .post("/users/login/", {
                       email: values.email,
                       password: values.password,
                     })
+                    // If something goes wrong with the login, just navigate to the main page
                     .catch(() => navigate("/"))
                 )
+                // If something goes wrong with the registration, set form errors so user can fix it
                 .catch((error) => setErrors(error.response.data))
             }
             initialValues={{}}

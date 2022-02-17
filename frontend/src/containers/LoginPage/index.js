@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import "./index.css";
 import { Formik } from "formik";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const validateSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
@@ -13,19 +12,19 @@ const validateSchema = Yup.object({
 });
 
 const LogIn = () => {
-  const navigate = useNavigate();
   return (
     <Center width="100%" height="100vh">
       <Container>
         <Container paddingTop="1em">
           <Formik
             onSubmit={(values, { setErrors, resetForm }) =>
+              // Make a POST request to /users/login/ with email and password to log in
               axios
                 .post("/users/login/", {
                   email: values.email,
                   password: values.password,
                 })
-                .catch(() => navigate("/"))
+                // If something goes wrong, set form errors
                 .catch((error) => setErrors(error.response.data))
             }
             initialValues={{}}
