@@ -27,6 +27,7 @@ class PostViewSetTest(APITestCase):
             "description": "Testy",
             "user": user.pk,
             "available": True,
+            "location": "Hjemme",
         }
         response = self.client.post(self.list_create_url, data)
         assert response.status_code == 201, f"Expected 201 but got {response.status_code}. Here is the data: {json.dumps(response.data, indent=4)}"

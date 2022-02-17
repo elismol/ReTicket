@@ -28,5 +28,7 @@ class Post(models.Model):
 
     available = models.BooleanField('available', default=True)
 
+    location = models.CharField('location', max_length=255)
+
     def __str__(self) -> str:
         return f"{self.user} {self.post_type} {self.event}"
