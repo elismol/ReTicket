@@ -1,8 +1,9 @@
 import { ChatIcon } from "@chakra-ui/icons";
 import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import PropTypes from "prop-types";
 import ProfileImage from "../../ProfileImage";
 
-const Post = ({ post }) => {
+function Post({ post }) {
   return (
     <Box bg="#FFFFFF">
       <HStack justifyContent="space-between">
@@ -28,6 +29,15 @@ const Post = ({ post }) => {
       </HStack>
     </Box>
   );
+}
+
+Post.propTypes = {
+  post: PropTypes.shape({
+    event: PropTypes.string,
+    location: PropTypes.string,
+    price: PropTypes.number,
+    user: PropTypes.number,
+  }).isRequired,
 };
 
 export default Post;
