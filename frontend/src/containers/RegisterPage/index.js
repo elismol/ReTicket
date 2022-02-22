@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
   last_name: Yup.string().required().label("Last name"),
   password: Yup.string().required().label("Password"),
   confirmPassword: Yup.string().when("password", {
-    is: (val) => (val && val.length > 0 ? true : false),
+    is: (val) => !!(val && val.length > 0),
     then: Yup.string().oneOf(
       [Yup.ref("password")],
       "Both passwords need to be the same"
@@ -28,14 +28,14 @@ const validationSchema = Yup.object({
   }),
 });
 
-const RegisterUser = () => {
+function RegisterUser() {
   const navigate = useNavigate();
   return (
     <Center width="100%" height="100vh">
       <Container>
         <Container paddingTop="1em">
           <Formik
-            onSubmit={(values, { setErrors, resetForm }) =>
+            onSubmit={(values, { setErrors }) =>
               // Post to /users/ to create a new user
               axios
                 .post("/users/", values)
@@ -55,7 +55,7 @@ const RegisterUser = () => {
             initialValues={{}}
             validationSchema={validationSchema}
           >
-            {(props) => (
+            {(formProps) => (
               <Box
                 borderWidth="1px"
                 rounded="lg"
@@ -64,7 +64,7 @@ const RegisterUser = () => {
                 p={6}
                 m="10px auto"
                 as="form"
-                onSubmit={props.handleSubmit}
+                onSubmit={formProps.handleSubmit}
               >
                 <VStack spacing={5} align="stretch">
                   <Box>
@@ -131,8 +131,8 @@ const RegisterUser = () => {
                   </Box>
                   <Box textAlign="right">
                     <SubmitButton
-                      isLoading={props.isSubmitting}
-                      isDisabled={!props.isValid}
+                      isLoading={formProps.isSubmitting}
+                      isDisabled={!formProps.isValid}
                     >
                       Register user
                     </SubmitButton>
@@ -145,6 +145,6 @@ const RegisterUser = () => {
       </Container>
     </Center>
   );
-};
+}
 
 export default RegisterUser;

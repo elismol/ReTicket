@@ -1,36 +1,39 @@
 import { Box, Center, Container, Heading, VStack } from "@chakra-ui/react";
+import axios from "axios";
+import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./index.css";
-import { Formik } from "formik";
-import axios from "axios";
 
 const validateSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
   password: Yup.string().required().label("Password"),
 });
 
-const LogIn = () => {
+function LogIn() {
+  const navigate = useNavigate();
   return (
     <Center width="100%" height="100vh">
       <Container>
         <Container paddingTop="1em">
           <Formik
-            onSubmit={(values, { setErrors, resetForm }) =>
+            onSubmit={(values, { setErrors }) =>
               // Make a POST request to /users/login/ with email and password to log in
               axios
                 .post("/users/login/", {
                   email: values.email,
                   password: values.password,
                 })
+                .then(() => navigate("/"))
                 // If something goes wrong, set form errors
                 .catch((error) => setErrors(error.response.data))
             }
             initialValues={{}}
             validationSchema={validateSchema}
           >
-            {(props) => (
+            {(formProps) => (
               <Box
                 borderWidth="1px"
                 rounded="lg"
@@ -39,7 +42,7 @@ const LogIn = () => {
                 p={6}
                 m="10px auto"
                 as="form"
-                onSubmit={props.handleSubmit}
+                onSubmit={formProps.handleSubmit}
               >
                 <VStack spacing={5} align="stretch">
                   <Box>
@@ -73,8 +76,8 @@ const LogIn = () => {
                   </Box>
                   <Box textAlign="right">
                     <SubmitButton
-                      isLoading={props.isSubmitting}
-                      isDisabled={!props.isValid}
+                      isLoading={formProps.isSubmitting}
+                      isDisabled={!formProps.isValid}
                     >
                       Log in
                     </SubmitButton>
@@ -87,6 +90,6 @@ const LogIn = () => {
       </Container>
     </Center>
   );
-};
+}
 
 export default LogIn;

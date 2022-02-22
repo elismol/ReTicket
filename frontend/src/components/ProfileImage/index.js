@@ -1,5 +1,5 @@
 function ProfileImage() {
-    return <></>
+  return <>Coming soon!</>;
 }
 
-export default ProfileImage
+export default ProfileImage;

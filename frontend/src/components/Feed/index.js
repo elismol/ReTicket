@@ -1,15 +1,16 @@
 import { Container, StackDivider, VStack } from "@chakra-ui/react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import React from "react";
 import "./index.css";
 import Post from "./Post";
 
-const Feed = ({ type }) => {
+function Feed({ type }) {
   const [posts, setPosts] = React.useState(undefined);
   React.useEffect(
     function getPosts() {
       axios
-        .get("/posts/?post_type=" + type)
+        .get(`/posts/?post_type=${type}`)
         .then((response) => setPosts(response.data));
     },
     [type]
@@ -31,6 +32,10 @@ const Feed = ({ type }) => {
       )}
     </Container>
   );
+}
+
+Feed.propTypes = {
+  type: PropTypes.oneOf(["BUYING", "SELLING"]).isRequired,
 };
 
 export default Feed;
