@@ -1,9 +1,12 @@
 import { Box, Divider, Heading, HStack, StackDivider } from "@chakra-ui/react";
 import Feed from "../../components/Feed";
 import "./index.css";
+import Header from "../../components/Header";
 
 const HomePage = () => {
   return (
+    <>
+    <Header /> 
     <HStack
       divider={<StackDivider borderColor="gray.200" />}
       width="100%"
@@ -25,6 +28,7 @@ const HomePage = () => {
         <Feed type="BUYING" />
       </Box>
     </HStack>
+    </>
   );
 };
 
