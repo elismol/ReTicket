@@ -1,6 +1,5 @@
 import { Box, Divider, Heading, HStack, StackDivider } from "@chakra-ui/react";
 import Feed from "../../components/Feed";
-import "./index.css";
 import Header from "../../components/Header";
 
 function HomePage() {
