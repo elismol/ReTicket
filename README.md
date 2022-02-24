@@ -2,6 +2,8 @@
 
 Application for "purchase and sale of cultural events". 
 
+Our Wiki page where you can find the groups work practices and standards: [wiki](https://gitlab.stud.idi.ntnu.no/tdt4140-2022/landsby-1/gruppe_03/reticket/-/wikis/home)
+
 To start this application you need to run both backend and frontend in different terminals. 
 - Info: You can run them seperately if you are just working in backend or frontend.
 
