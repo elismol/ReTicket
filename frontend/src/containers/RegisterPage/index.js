@@ -11,7 +11,6 @@ import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
 import React from "react";
 import * as Yup from "yup";
-import "./index.css";
 import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({

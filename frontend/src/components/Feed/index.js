@@ -2,7 +2,6 @@ import { Container, StackDivider, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import React from "react";
-import "./index.css";
 import Post from "./Post";
 
 function Feed({ type }) {

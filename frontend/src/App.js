@@ -1,7 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import HomePage from "./containers/HomePage";
 import LoginPage from "./containers/LoginPage";
 import RegisterPage from "./containers/RegisterPage";
