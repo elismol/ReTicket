@@ -5,7 +5,6 @@ import { InputControl, SubmitButton } from "formik-chakra-ui";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import "./index.css";
 
 const validateSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
