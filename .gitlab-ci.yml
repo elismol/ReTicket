@@ -30,7 +30,7 @@ lint_backend:
     # Go into frontend
     - cd backend
     # Install requirements
-    - pip install pylint
+    - python -m pip install pylint
     # Run linting
     - python -m pylint .
 
