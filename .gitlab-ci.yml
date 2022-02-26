@@ -26,6 +26,7 @@ unit_tests_frontend:
 
 lint_backend:
   stage: lint
+  image: "python:3.7"
   script:
     # Go into frontend
     - cd backend
