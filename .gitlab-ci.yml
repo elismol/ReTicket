@@ -1,0 +1,22 @@
+image: node
+
+stage:
+  - lint
+  - test
+
+# Lets name our Job lint_and_test, because that's what it's doing.
+lint_and_test:
+  # Tell lint_and_test what stage it is. (This could also be build or test for example)
+  stage: lint
+  # What scripts do we want to run?
+  script:
+    # Go into frontend directory
+    - cd frontend
+    # Install required packages
+    - npm i
+    # Run lint script from package.json
+    - npm run lint
+  # Create a test stage for running unit tests
+  stage: test
+  script:
+    - npm run test
