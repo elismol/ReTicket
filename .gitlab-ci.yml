@@ -32,7 +32,7 @@ lint_backend:
   # This job should be run as part of the "lint" stage
   stage: lint
   # Use a docker image with python preinstalled
-  image: "python:3.7"
+  image: "python:3.10"
   script:
     # Go into frontend
     - cd backend
@@ -44,7 +44,7 @@ lint_backend:
 unit_tests_backend:
   # This job should be run as part of the "test" stage
   stage: test
-  image: "python:3.7"
+  image: "python:3.10"
   script:
     - cd backend
     - pip install -r requirements.txt
