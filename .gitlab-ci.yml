@@ -1,5 +1,7 @@
 stages:
+  # Jobs in "lint" stage will be run in parallell
   - lint
+  # If they succeed, the jobs in the "test" stage will be run in parallell
   - test
 
 lint_frontend:
