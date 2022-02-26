@@ -1,11 +1,12 @@
-image: node:latest
-
 stages:
   - lint
   - test
 
 lint_frontend:
+  # This job should be run as part of the "lint" stage
   stage: lint
+  # Use a docker image with node preinstalled
+  image: node:latest
   script:
     # Go into frontend
     - cd frontend
@@ -15,7 +16,10 @@ lint_frontend:
     - npm run lint
 
 unit_tests_frontend:
+  # This job should be run as part of the "test" stage
   stage: test
+  # Use a docker image with node preinstalled
+  image: node:latest
   script:
     # Go into frontend
     - cd frontend
@@ -25,7 +29,9 @@ unit_tests_frontend:
     - npm run test
 
 lint_backend:
+  # This job should be run as part of the "lint" stage
   stage: lint
+  # Use a docker image with python preinstalled
   image: "python:3.7"
   script:
     # Go into frontend
@@ -36,6 +42,7 @@ lint_backend:
     - python -m pylint .
 
 unit_tests_backend:
+  # This job should be run as part of the "test" stage
   stage: test
   image: "python:3.7"
   script:
