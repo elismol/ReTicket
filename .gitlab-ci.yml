@@ -23,3 +23,21 @@ unit_tests_frontend:
     - npm install
     # Run tests
     - npm run test
+
+lint_backend:
+  stage: lint
+  script:
+    # Go into frontend
+    - cd backend
+    # Install requirements
+    - pip install pylint
+    # Run linting
+    - python -m pylint .
+
+unit_tests_backend:
+  stage: test
+  image: "python:3.7"
+  script:
+    - cd backend
+    - pip install -r requirements.txt
+    - python manage.py test
