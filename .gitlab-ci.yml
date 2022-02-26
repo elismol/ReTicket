@@ -2,13 +2,24 @@ image: node:latest
 
 stages:
   - lint
+  - test
 
-eslint:
+lint_frontend:
   stage: lint
   script:
     # Go into frontend
     - cd frontend
-    # Install ESLint in this docker container
+    # Install requirements
     - npm install
-    # Run ESLint
+    # Run linting
     - npm run lint
+
+unit_tests_frontend:
+  stage: test
+  script:
+    # Go into frontend
+    - cd frontend
+    # Install requirements
+    - npm install
+    # Run tests
+    - npm run test
