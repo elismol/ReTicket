@@ -1,30 +1,14 @@
-image: node
+image: node:latest
 
-stage:
+stages:
   - lint
-  - test
 
-# Lets name our Job lint, because that's what it's doing.
-lint:
-  # Tell lint what stage it is. (This could also be build or test for example)
+eslint:
   stage: lint
-  # What scripts do we want to run?
   script:
-    # Go into frontend directory
+    # Go into frontend
     - cd frontend
-    # Install required packages
-    - npm i
-    # Run lint script from package.json
+    # Install ESLint in this docker container
+    - npm install
+    # Run ESLint
     - npm run lint
-
-# Create another job for running tests inb the frontend
-test_frontend:
-  stage: test
-  # What scripts do we want to run?
-  script:
-    # Go into frontend directory
-    - cd frontend
-    # Install required packages
-    - npm i
-    # Run test script from package.json
-    - npm run test
