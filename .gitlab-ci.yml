@@ -2,7 +2,6 @@ image: node
 
 stage:
   - lint
-  - test
 
 # Lets name our Job lint_and_test, because that's what it's doing.
 lint_and_test:
