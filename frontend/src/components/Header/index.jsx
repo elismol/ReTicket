@@ -1,4 +1,4 @@
-import { AddIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { AddIcon, ChatIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
@@ -18,13 +18,15 @@ import {
 import React from "react";
 import NavLink from "./NavLink";
 
-const Links = ["Home", "Messages"];
-
+const HeaderItems = [
+  { href: "/Messages", icon: ChatIcon },
+  { href: "/NewPost", icon: AddIcon },
+];
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box bg={useColorModeValue("green.100", "green.900")} px={4}>
+    <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <IconButton
           size="md"
@@ -36,21 +38,12 @@ export default function Header() {
         <HStack spacing={8} alignItems="center">
           <Box>Reticket</Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
-            {Links.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
+            {HeaderItems.map(({ href, icon }) => (
+              <NavLink key={href} icon={icon} href={href} />
             ))}
           </HStack>
         </HStack>
         <Flex alignItems="center">
-          <Button
-            variant="solid"
-            colorScheme="teal"
-            size="sm"
-            mr={4}
-            leftIcon={<AddIcon />}
-          >
-            New Post
-          </Button>
           <Menu>
             <MenuButton
               as={Button}
@@ -73,7 +66,7 @@ export default function Header() {
       {isOpen ? (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as="nav" spacing={4}>
-            {Links.map((link) => (
+            {HeaderItems.map((link) => (
               <NavLink key={link}>{link}</NavLink>
             ))}
           </Stack>
