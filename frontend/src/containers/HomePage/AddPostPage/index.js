@@ -18,6 +18,7 @@ import {
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useCurrentUser } from "../../../contexts/UserInfoContext";
 import { BUYING, SELLING } from "./constants";
 
 const validationSchema = Yup.object({
@@ -35,6 +36,24 @@ const initialValues = { post_type: SELLING };
 
 function AddPostPage() {
   const navigate = useNavigate();
+  const user = useCurrentUser();
+  if (!user)
+    return (
+      <HStack
+        divider={<StackDivider borderColor="gray.200" />}
+        width="100%"
+        justifyContent="space-around"
+        height="100%"
+        top="0"
+        backgroundColor="#F5F5F3"
+        padding="0.5em"
+        overflowY="auto"
+      >
+        <Center width="100%" height="100vh">
+          You need to be logged in to view this page
+        </Center>
+      </HStack>
+    );
   return (
     <HStack
       divider={<StackDivider borderColor="gray.200" />}
@@ -53,7 +72,7 @@ function AddPostPage() {
               onSubmit={(values, { setErrors }) =>
                 // Make a POST request to /users/login/ with email and password to log in
                 axios
-                  .post("/posts/", { ...values, user: 1 })
+                  .post("/posts/", { ...values, user: user.id })
                   .then(() => navigate("/"))
                   // If something goes wrong, set form errors
                   .catch((error) => setErrors(error.response.data))

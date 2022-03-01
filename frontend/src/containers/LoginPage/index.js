@@ -5,6 +5,7 @@ import { InputControl, SubmitButton } from "formik-chakra-ui";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useUserInfoContext } from "../../contexts/UserInfoContext";
 
 const validateSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
@@ -13,6 +14,7 @@ const validateSchema = Yup.object({
 
 function LogIn() {
   const navigate = useNavigate();
+  const userContext = useUserInfoContext();
   return (
     <Center width="100%" height="100vh">
       <Container>
@@ -25,7 +27,10 @@ function LogIn() {
                   email: values.email,
                   password: values.password,
                 })
-                .then(() => navigate("/"))
+                .then((user) => {
+                  userContext.setCurrentUser(user);
+                  navigate("/");
+                })
                 // If something goes wrong, set form errors
                 .catch((error) => setErrors(error.response.data))
             }
