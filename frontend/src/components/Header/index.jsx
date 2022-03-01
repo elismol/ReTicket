@@ -1,4 +1,4 @@
-import { AddIcon, ChatIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { AddIcon, ChatIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
@@ -16,14 +16,18 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useCurrentUser } from "../../contexts/UserInfoContext";
 import NavLink from "./NavLink";
 
 const HeaderItems = [
-  { href: "/messages", icon: ChatIcon },
-  { href: "/create-post", icon: AddIcon },
+  { href: "/messages", icon: ChatIcon, text: "Messages" },
+  { href: "/create-post", icon: AddIcon, text: "New post" },
 ];
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const user = useCurrentUser();
+  const navigate = useNavigate();
 
   return (
     <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
@@ -38,28 +42,32 @@ export default function Header() {
         <HStack spacing={8} alignItems="center">
           <Box>Reticket</Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
-            {HeaderItems.map(({ href, icon }) => (
-              <NavLink key={href} icon={icon} href={href} />
+            {HeaderItems.map(({ href, icon, text }) => (
+              <NavLink key={href} icon={icon} href={href} text={text} />
             ))}
           </HStack>
         </HStack>
         <Flex alignItems="center">
-          <Menu>
-            <MenuButton
-              as={Button}
-              rounded="full"
-              variant="link"
-              cursor="pointer"
-              minW={0}
-            >
-              <Avatar size="sm" src="/logo.png" />
-            </MenuButton>
-            <MenuList>
-              <MenuItem>Profile</MenuItem>
-              <MenuDivider />
-              <MenuItem>Log Out</MenuItem>
-            </MenuList>
-          </Menu>
+          {user ? (
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded="full"
+                variant="link"
+                cursor="pointer"
+                minW={0}
+              >
+                <Avatar size="sm" src="/logo.png" />
+              </MenuButton>
+              <MenuList>
+                <MenuItem>Profile</MenuItem>
+                <MenuDivider />
+                <MenuItem>Log Out</MenuItem>
+              </MenuList>
+            </Menu>
+          ) : (
+            <Button onClick={() => navigate("/login")}>Log in</Button>
+          )}
         </Flex>
       </Flex>
 
