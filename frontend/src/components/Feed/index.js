@@ -50,7 +50,7 @@ function Feed({ type }) {
             </InputRightElement>
           </InputGroup>
           {filteredPosts.map((post) => (
-            <Post post={post} />
+            <Post key={post.id} post={post} />
           ))}
         </VStack>
       )}
