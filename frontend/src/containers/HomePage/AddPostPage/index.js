@@ -54,7 +54,9 @@ function AddPostPage() {
           <VStack>
             <Box>You need to log in to view this page.</Box>
             <Box>
-              <Button onClick={() => navigate("/login")}>Log in</Button>
+              <Button onClick={() => navigate("/login?returnTo=/create-post")}>
+                Log in
+              </Button>
             </Box>
           </VStack>
         </Center>

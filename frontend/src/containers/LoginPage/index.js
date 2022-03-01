@@ -10,8 +10,8 @@ import {
 import axios from "axios";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useUserInfoContext } from "../../contexts/UserInfoContext";
 
@@ -22,6 +22,11 @@ const validateSchema = Yup.object({
 
 function LogIn() {
   const navigate = useNavigate();
+  const { search } = useLocation();
+  const returnTo = useMemo(() => {
+    const urlParams = new URLSearchParams(search);
+    return urlParams.get("returnTo") ?? "/";
+  });
   const userContext = useUserInfoContext();
   return (
     <Center width="100%" height="100vh">
@@ -37,7 +42,7 @@ function LogIn() {
                 })
                 .then((response) => {
                   userContext.setCurrentUser(response.data);
-                  navigate("/");
+                  navigate(returnTo);
                 })
                 // If something goes wrong, set form errors
                 .catch((error) => setErrors(error.response.data))
