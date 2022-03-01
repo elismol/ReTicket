@@ -68,7 +68,7 @@ function AddPostPage() {
                   formProps.values.post_type === BUYING
                     ? "potential sellers"
                     : "potential buyers";
-                console.log(formProps);
+
                 return (
                   <Box
                     borderWidth="1px"
