@@ -24,8 +24,13 @@ function LogIn() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const returnTo = useMemo(() => {
+    // If ?returnTo=... is specified in the URL, go back to that page
     const urlParams = new URLSearchParams(search);
-    return urlParams.get("returnTo") ?? "/";
+    return (
+      urlParams.get("returnTo") ??
+      // Otherwise, we go to the main page
+      "/"
+    );
   });
   const userContext = useUserInfoContext();
   return (
