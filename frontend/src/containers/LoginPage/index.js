@@ -1,4 +1,12 @@
-import { Box, Center, Container, Heading, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Container,
+  Heading,
+  VStack,
+  Text,
+  Link,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
@@ -82,9 +90,18 @@ function LogIn() {
                     <SubmitButton
                       isLoading={formProps.isSubmitting}
                       isDisabled={!formProps.isValid}
+                      style={{ backgroundColor: "#87A8A4", color: "#FFFFFF" }}
                     >
                       Log in
                     </SubmitButton>
+                  </Box>
+                  <Box textAlign="left">
+                    <Text color="#87A8A4">
+                      Not a member yet?
+                      <Link color="#87A8A4" href="/register">
+                        <b> Register!</b>
+                      </Link>
+                    </Text>
                   </Box>
                 </VStack>
               </Box>

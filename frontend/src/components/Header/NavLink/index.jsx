@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import { Link, useColorModeValue } from "@chakra-ui/react";
+import { Icon, Link, useColorModeValue } from "@chakra-ui/react";
 
-function NavLink({ href }) {
+function NavLink({ href, icon }) {
   return (
     <Link
       px={2}
@@ -12,12 +12,16 @@ function NavLink({ href }) {
         bg: useColorModeValue("green.200", "green.700"),
       }}
       href={href}
-    />
+    >
+      <Icon as={icon} />
+    </Link>
   );
 }
 
 NavLink.propTypes = {
   href: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  icon: PropTypes.elementType,
 };
 
 export default NavLink;
