@@ -21,7 +21,7 @@ class Post(models.Model):
 
     price = models.FloatField('price', null=True, blank=True)
 
-    description = models.TextField('description')
+    description = models.TextField('description', null=True, blank=True)
 
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, verbose_name='user')
