@@ -1,5 +1,7 @@
 import { Box } from "@chakra-ui/react";
+import { Route, Routes } from "react-router-dom";
 import Header from "../../components/Header";
+import AddPostPage from "./AddPostPage";
 import FeedPage from "./FeedPage";
 
 function HomePage() {
@@ -12,7 +14,10 @@ function HomePage() {
       overflow="hidden"
     >
       <Header />
-      <FeedPage />
+      <Routes>
+        <Route path="create-post" element={<AddPostPage />} />
+        <Route path="" element={<FeedPage />} />
+      </Routes>
     </Box>
   );
 }

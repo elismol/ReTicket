@@ -10,9 +10,10 @@ import {
 import axios from "axios";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useUserInfoContext } from "../../contexts/UserInfoContext";
 
 const validateSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
@@ -21,6 +22,17 @@ const validateSchema = Yup.object({
 
 function LogIn() {
   const navigate = useNavigate();
+  const { search } = useLocation();
+  const returnTo = useMemo(() => {
+    // If ?returnTo=... is specified in the URL, go back to that page
+    const urlParams = new URLSearchParams(search);
+    return (
+      urlParams.get("returnTo") ??
+      // Otherwise, we go to the main page
+      "/"
+    );
+  });
+  const userContext = useUserInfoContext();
   return (
     <Center width="100%" height="100vh">
       <Container>
@@ -33,7 +45,10 @@ function LogIn() {
                   email: values.email,
                   password: values.password,
                 })
-                .then(() => navigate("/"))
+                .then((response) => {
+                  userContext.setCurrentUser(response.data);
+                  navigate(returnTo);
+                })
                 // If something goes wrong, set form errors
                 .catch((error) => setErrors(error.response.data))
             }
