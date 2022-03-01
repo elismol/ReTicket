@@ -132,6 +132,7 @@ function RegisterUser() {
                     <SubmitButton
                       isLoading={formProps.isSubmitting}
                       isDisabled={!formProps.isValid}
+                      style={{ backgroundColor: "#87A8A4", color: "#FFFFFF" }}
                     >
                       Register user
                     </SubmitButton>
