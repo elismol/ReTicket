@@ -1,9 +1,12 @@
+import { Icon, useColorModeValue, Link } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import { Icon, Link, useColorModeValue } from "@chakra-ui/react";
+import { NavLink as ReactNavLink } from "react-router-dom";
 
 function NavLink({ href, icon }) {
   return (
     <Link
+      to={href}
+      as={ReactNavLink}
       px={2}
       py={1}
       rounded="md"
@@ -11,7 +14,6 @@ function NavLink({ href, icon }) {
         textDecoration: "none",
         bg: useColorModeValue("green.200", "green.700"),
       }}
-      href={href}
     >
       <Icon as={icon} />
     </Link>

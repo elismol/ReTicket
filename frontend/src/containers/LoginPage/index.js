@@ -35,8 +35,8 @@ function LogIn() {
                   email: values.email,
                   password: values.password,
                 })
-                .then((user) => {
-                  userContext.setCurrentUser(user);
+                .then((response) => {
+                  userContext.setCurrentUser(response.data);
                   navigate("/");
                 })
                 // If something goes wrong, set form errors

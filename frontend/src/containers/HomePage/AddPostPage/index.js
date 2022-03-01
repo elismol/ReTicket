@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Center,
   Container,
   Heading,
@@ -11,8 +12,8 @@ import axios from "axios";
 import { Formik } from "formik";
 import {
   InputControl,
-  SubmitButton,
   SelectControl,
+  SubmitButton,
   TextareaControl,
 } from "formik-chakra-ui";
 import React from "react";
@@ -50,7 +51,12 @@ function AddPostPage() {
         overflowY="auto"
       >
         <Center width="100%" height="100vh">
-          You need to be logged in to view this page
+          <VStack>
+            <Box>You need to log in to view this page.</Box>
+            <Box>
+              <Button onClick={() => navigate("/login")}>Log in</Button>
+            </Box>
+          </VStack>
         </Center>
       </HStack>
     );

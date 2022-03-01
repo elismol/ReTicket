@@ -19,8 +19,8 @@ import React from "react";
 import NavLink from "./NavLink";
 
 const HeaderItems = [
-  { href: "/Messages", icon: ChatIcon },
-  { href: "/NewPost", icon: AddIcon },
+  { href: "/messages", icon: ChatIcon },
+  { href: "/create-post", icon: AddIcon },
 ];
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
