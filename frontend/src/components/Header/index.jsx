@@ -14,9 +14,11 @@ import {
   Stack,
   useColorModeValue,
   useDisclosure,
+  Link,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink as ReactNavLink } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/UserInfoContext";
 import NavLink from "./NavLink";
 
@@ -30,7 +32,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+    <Box bg={useColorModeValue("#76b5c5", "blue.900")} px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <IconButton
           size="md"
@@ -40,7 +42,13 @@ export default function Header() {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems="center">
-          <Box>Reticket</Box>
+          <Box>
+            <Text>
+              <Link to="/" as={ReactNavLink} color="white">
+                ReTicket
+              </Link>
+            </Text>
+          </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
             {HeaderItems.map(({ href, icon, text }) => (
               <NavLink key={href} icon={icon} href={href} text={text} />
@@ -74,8 +82,8 @@ export default function Header() {
       {isOpen ? (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as="nav" spacing={4}>
-            {HeaderItems.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
+            {HeaderItems.map((href, icon, text) => (
+              <NavLink key={href} href={href} icon={icon} text={text} />
             ))}
           </Stack>
         </Box>

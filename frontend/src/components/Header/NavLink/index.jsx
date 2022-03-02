@@ -10,9 +10,11 @@ function NavLink({ href, icon, text }) {
       px={2}
       py={1}
       rounded="md"
+      color="white"
       _hover={{
+        color: "black",
         textDecoration: "none",
-        bg: useColorModeValue("green.200", "green.700"),
+        bg: useColorModeValue("blue.200", "blue.700"),
       }}
     >
       <Icon as={icon} />
