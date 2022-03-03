@@ -7,15 +7,15 @@ function NavLink({ href, icon, text }) {
     <Link
       to={href}
       as={ReactNavLink}
+      color="white"
       data-testid={`link-to-${href}`}
       px={2}
       py={1}
       rounded="md"
-      color="white"
       _hover={{
         color: "black",
         textDecoration: "none",
-        bg: useColorModeValue("blue.200", "blue.700"),
+        bg: useColorModeValue("green.100", "green.700"),
       }}
     >
       <Icon as={icon} />
