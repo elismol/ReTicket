@@ -34,7 +34,7 @@ export default function Header() {
   const userContext = useUserInfoContext();
 
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+    <Box bg={useColorModeValue("#87A8A4", "blue.900")} px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <IconButton
           size="md"
@@ -84,8 +84,8 @@ export default function Header() {
       {isOpen ? (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as="nav" spacing={4}>
-            {HeaderItems.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
+            {HeaderItems.map((href, icon, text) => (
+              <NavLink key={href} href={href} icon={icon} text={text} />
             ))}
           </Stack>
         </Box>
