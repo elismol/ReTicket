@@ -18,8 +18,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { useNavigate, NavLink as ReactNavLink } from "react-router-dom";
-import { useCurrentUser } from "../../contexts/UserInfoContext";
+import { NavLink as ReactNavLink, useNavigate } from "react-router-dom";
+import {
+  useCurrentUser,
+  useUserInfoContext,
+} from "../../contexts/UserInfoContext";
 import NavLink from "./NavLink";
 
 const HeaderItems = [
@@ -30,6 +33,7 @@ export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useCurrentUser();
   const navigate = useNavigate();
+  const userContext = useUserInfoContext();
 
   return (
     <Box bg={useColorModeValue("#87A8A4", "blue.900")} px={4}>
@@ -43,11 +47,7 @@ export default function Header() {
         />
         <HStack spacing={8} alignItems="center">
           <Box>
-            <Text>
-              <Link to="/" as={ReactNavLink} color="white">
-                ReTicket
-              </Link>
-            </Text>
+            <ReactNavLink to="/">Reticket</ReactNavLink>
           </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
             {HeaderItems.map(({ href, icon, text }) => (
@@ -68,9 +68,13 @@ export default function Header() {
                 <Avatar size="sm" src="/logo.png" />
               </MenuButton>
               <MenuList>
-                <MenuItem>Profile</MenuItem>
+                <MenuItem onClick={() => navigate("/profile-page")}>
+                  Profile
+                </MenuItem>
                 <MenuDivider />
-                <MenuItem>Log Out</MenuItem>
+                <MenuItem onClick={() => userContext.logOut()}>
+                  Log Out
+                </MenuItem>
               </MenuList>
             </Menu>
           ) : (

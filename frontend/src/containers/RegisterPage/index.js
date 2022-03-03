@@ -45,8 +45,8 @@ function RegisterUser() {
                       email: values.email,
                       password: values.password,
                     })
-                    // If something goes wrong with the login, just navigate to the main page
-                    .catch(() => navigate("/"))
+                    // After attempted login, navigate to main page
+                    .finally(() => navigate("/"))
                 )
                 // If something goes wrong with the registration, set form errors so user can fix it
                 .catch((error) => setErrors(error.response.data))
