@@ -13,6 +13,7 @@ function HomePage() {
       display="flex"
       flexDirection="column"
       overflow="hidden"
+      background-color="#F5F5F3"
     >
       <Header />
       <Routes>
