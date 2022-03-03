@@ -67,7 +67,7 @@ function ProfilePage() {
               boxSize="300px"
               src="https://bit.ly/dan-abramov"
             /> */}
-            <UserInfoImage id="13" />
+            <UserInfoImage id={user?.id} />
             <Box>
               Change profile picture{" "}
               <LinkOverlay href="#">
