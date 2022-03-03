@@ -66,7 +66,9 @@ export default function Header() {
                 <Avatar size="sm" src="/logo.png" />
               </MenuButton>
               <MenuList>
-                <MenuItem>Profile</MenuItem>
+                <MenuItem onClick={() => navigate("/profile-page")}>
+                  Profile
+                </MenuItem>
                 <MenuDivider />
                 <MenuItem onClick={() => userContext.logOut()}>
                   Log Out
