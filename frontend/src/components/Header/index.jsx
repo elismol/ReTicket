@@ -14,8 +14,6 @@ import {
   Stack,
   useColorModeValue,
   useDisclosure,
-  Link,
-  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import { NavLink as ReactNavLink, useNavigate } from "react-router-dom";
