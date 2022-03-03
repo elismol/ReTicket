@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import LoginPage from ".";
 import { BrowserRouter } from "react-router-dom";
+import LoginPage from ".";
 
 describe(LoginPage, () => {
   it("render elements from loginPage", () => {
