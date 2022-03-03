@@ -17,7 +17,10 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useCurrentUser } from "../../contexts/UserInfoContext";
+import {
+  useCurrentUser,
+  useUserInfoContext,
+} from "../../contexts/UserInfoContext";
 import NavLink from "./NavLink";
 
 const HeaderItems = [
@@ -28,6 +31,7 @@ export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useCurrentUser();
   const navigate = useNavigate();
+  const userContext = useUserInfoContext();
 
   return (
     <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
@@ -62,7 +66,9 @@ export default function Header() {
               <MenuList>
                 <MenuItem>Profile</MenuItem>
                 <MenuDivider />
-                <MenuItem>Log Out</MenuItem>
+                <MenuItem onClick={() => userContext.logOut()}>
+                  Log Out
+                </MenuItem>
               </MenuList>
             </Menu>
           ) : (

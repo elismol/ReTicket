@@ -3,11 +3,10 @@ import {
   Center,
   Container,
   Heading,
-  VStack,
-  Text,
   Link,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
 import React, { useMemo } from "react";
@@ -39,16 +38,10 @@ function LogIn() {
         <Container paddingTop="1em">
           <Formik
             onSubmit={(values, { setErrors }) =>
-              // Make a POST request to /users/login/ with email and password to log in
-              axios
-                .post("/users/login/", {
-                  email: values.email,
-                  password: values.password,
-                })
-                .then((response) => {
-                  userContext.setCurrentUser(response.data);
-                  navigate(returnTo);
-                })
+              // Use the userContext to log in
+              userContext
+                .logIn(values.email, values.password)
+                .then(() => navigate(returnTo))
                 // If something goes wrong, set form errors
                 .catch((error) => setErrors(error.response.data))
             }

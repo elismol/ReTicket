@@ -1,10 +1,11 @@
+from django.http import Http404
 from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from users.serializers import CreateUserSerializer, UserSerializer, LoginSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import action
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 """
 This view set allows:
@@ -46,3 +47,18 @@ class UserViewSet(mixins.CreateModelMixin,
         else:
             # Return an 'invalid login' error message.
             return Response({"error": ["Invalid email or password"]}, status=400)
+
+    @action(detail=False, methods=["GET"])
+    def current(self, request):
+        """
+        Returns the current user.
+        """
+        if isinstance(request.user, get_user_model()):
+            serializer = self.serializer_class(request.user)
+            return Response(serializer.data)
+        return Response({"detail": "You are not logged in"}, status=404)
+
+    @action(detail=False)
+    def logout(self, request):
+        logout(request)
+        return Response(status=201)
