@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'email']
+        fields = ['id', 'first_name', 'last_name', 'email', 'image']
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -18,7 +18,8 @@ class CreateUserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'email', 'password']
+        fields = ['id', 'first_name', 'last_name',
+                  'email', 'password', 'image']
 
     # The password needs to be hashed, so we need to override the field
     password = serializers.CharField(
