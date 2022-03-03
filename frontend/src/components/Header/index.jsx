@@ -32,7 +32,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <Box bg={useColorModeValue("#76b5c5", "blue.900")} px={4}>
+    <Box bg={useColorModeValue("#87A8A4", "blue.900")} px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <IconButton
           size="md"

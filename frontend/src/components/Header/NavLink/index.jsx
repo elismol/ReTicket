@@ -7,6 +7,7 @@ function NavLink({ href, icon, text }) {
     <Link
       to={href}
       as={ReactNavLink}
+      data-testid={`link-to-${href}`}
       px={2}
       py={1}
       rounded="md"
