@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
+import ProfilePage from "./ProfilePage";
 import Header from "../../components/Header";
 import AddPostPage from "./AddPostPage";
 import FeedPage from "./FeedPage";
@@ -15,6 +16,7 @@ function HomePage() {
     >
       <Header />
       <Routes>
+        <Route path="profile-page" element={<ProfilePage />} />
         <Route path="create-post" element={<AddPostPage />} />
         <Route path="" element={<FeedPage />} />
       </Routes>
