@@ -106,6 +106,7 @@ function AddPostPage() {
                     m="10px auto"
                     as="form"
                     onSubmit={formProps.handleSubmit}
+                    background="#fff"
                   >
                     <VStack spacing={5} align="stretch">
                       <Box>
