@@ -32,7 +32,7 @@ function Feed({ type }) {
     [posts, searchTerm]
   );
   return (
-    <Container overflowY="auto" height="100%">
+    <Container overflowY="auto">
       {posts === undefined ? (
         "Loading...."
       ) : (
