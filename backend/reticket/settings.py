@@ -51,7 +51,12 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # Here we have commented out CsrfViewMiddleware because requiring CSRF tokens is
+    # impractical when we have a React frontend and a Django API.
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # We must also add a DisableCSRFMiddleware to prevent SessionAuthentication from
+    # doing CSRF validation.
+    'reticket.middleware.disable_csrf.DisableCSRFMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -142,8 +147,10 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.openapi.AutoSchema",
 }
 
+# Allows requests from the front end
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
 
+# Allows requests from the front end to include credentials
 CORS_ALLOW_CREDENTIALS = True
