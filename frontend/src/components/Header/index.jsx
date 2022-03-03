@@ -16,7 +16,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink as ReactNavLink, useNavigate } from "react-router-dom";
 import {
   useCurrentUser,
   useUserInfoContext,
@@ -44,7 +44,9 @@ export default function Header() {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems="center">
-          <Box>Reticket</Box>
+          <Box>
+            <ReactNavLink to="/">Reticket</ReactNavLink>
+          </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
             {HeaderItems.map(({ href, icon, text }) => (
               <NavLink key={href} icon={icon} href={href} text={text} />
