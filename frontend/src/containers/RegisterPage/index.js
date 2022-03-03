@@ -81,6 +81,7 @@ function RegisterUser() {
                       placeholder="ola.nordmann@example.com"
                       required
                       label="Email address"
+                      data-testid="email-input"
                     />
                   </Box>
                   <HStack justifyContent="space-between" w="100%">
@@ -91,6 +92,7 @@ function RegisterUser() {
                         placeholder="Ola"
                         required
                         label="First name"
+                        data-testid="firstname-input"
                       />
                     </Box>
                     <Box>
@@ -100,6 +102,7 @@ function RegisterUser() {
                         placeholder="Nordmann"
                         required
                         label="Last name"
+                        data-testid="lastname-input"
                       />
                     </Box>
                   </HStack>
@@ -108,6 +111,7 @@ function RegisterUser() {
                       required
                       name="password"
                       label="Password"
+                      data-testid="password-input"
                       inputProps={{
                         type: "password",
                         autoComplete: "new-password",
@@ -120,6 +124,7 @@ function RegisterUser() {
                     <InputControl
                       required
                       name="confirmPassword"
+                      data-testid="confirmPassword-input"
                       inputProps={{
                         type: "password",
                         autoComplete: "new-password",

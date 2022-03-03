@@ -82,6 +82,7 @@ function LogIn() {
                       placeholder="ola.nordmann@example.com"
                       required
                       label="Email address"
+                      data-testid="email-input"
                     />
                   </Box>
                   <Box>
@@ -89,6 +90,7 @@ function LogIn() {
                       required
                       name="password"
                       label="Password"
+                      data-testid="password-input"
                       inputProps={{
                         type: "password",
                         autoComplete: "password",
