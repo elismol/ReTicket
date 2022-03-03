@@ -12,6 +12,7 @@ import { InputControl, SubmitButton } from "formik-chakra-ui";
 import React from "react";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useUserInfoContext } from "../../contexts/UserInfoContext";
 
 const validationSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
@@ -29,6 +30,7 @@ const validationSchema = Yup.object({
 
 function RegisterUser() {
   const navigate = useNavigate();
+  const userContext = useUserInfoContext();
   return (
     <Center width="100%" height="100vh">
       <Container>
@@ -39,12 +41,9 @@ function RegisterUser() {
               axios
                 .post("/users/", values)
                 .then(() =>
-                  // Post to /users/login/ to automatically log in the new user
-                  axios
-                    .post("/users/login/", {
-                      email: values.email,
-                      password: values.password,
-                    })
+                  // Automatically log in the new user
+                  userContext
+                    .logIn(values.email, values.password)
                     // After attempted login, navigate to main page
                     .finally(() => navigate("/"))
                 )
