@@ -1,17 +1,29 @@
-import { Center, Circle } from "@chakra-ui/react";
+import { Avatar, Center } from "@chakra-ui/react";
+import axios from "axios";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
-function ProfileImage({ userId }) {
-  console.log(userId);
+function ProfileImage({ userId, size = "sm" }) {
+  const [userObj, setUserObj] = useState(null);
+  useEffect(() => {
+    axios
+      .get(`/users/${userId}/`)
+      .then((response) => setUserObj(response.data));
+  }, []);
   return (
-    <Center w="100%" h="50%" color="white">
-      <Circle size="40px" bg="gray" color="white" alignContent="70%" />
+    <Center>
+      <Avatar size={size} src={userObj?.image} />
     </Center>
   );
 }
 
+ProfileImage.defaultProps = {
+  size: "sm",
+};
+
 ProfileImage.propTypes = {
   userId: PropTypes.number.isRequired,
+  size: PropTypes.string,
 };
 
 export default ProfileImage;
