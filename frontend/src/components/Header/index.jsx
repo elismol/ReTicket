@@ -1,4 +1,4 @@
-import { AddIcon, ChatIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { AddIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
@@ -24,10 +24,7 @@ import {
 } from "../../contexts/UserInfoContext";
 import NavLink from "./NavLink";
 
-const HeaderItems = [
-  { href: "/messages", icon: ChatIcon, text: "Messages" },
-  { href: "/create-post", icon: AddIcon, text: "New post" },
-];
+const HeaderItems = [{ href: "/create-post", icon: AddIcon, text: "New post" }];
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useCurrentUser();

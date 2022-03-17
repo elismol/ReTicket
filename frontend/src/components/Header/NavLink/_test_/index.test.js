@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { AddIcon, ChatIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import { BrowserRouter } from "react-router-dom";
 import { cleanup } from "@testing-library/react";
 import NavLink from "..";
@@ -10,10 +10,7 @@ afterEach(cleanup);
 
 it("renders withour crashing", () => {
   const div = document.createElement("div");
-  const HeaderItems = [
-    { href: "/messages", icon: ChatIcon, text: "Messages" },
-    { href: "/new-post", icon: AddIcon, text: "New post" },
-  ];
+  const HeaderItems = [{ href: "/new-post", icon: AddIcon, text: "New post" }];
 
   ReactDOM.render(
     <BrowserRouter>
