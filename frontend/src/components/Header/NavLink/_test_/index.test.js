@@ -10,10 +10,7 @@ afterEach(cleanup);
 
 it("renders withour crashing", () => {
   const div = document.createElement("div");
-  const HeaderItems = [
-    { href: "/messages", icon: ChatIcon, text: "Messages" },
-    { href: "/new-post", icon: AddIcon, text: "New post" },
-  ];
+  const HeaderItems = [{ href: "/new-post", icon: AddIcon, text: "New post" }];
 
   ReactDOM.render(
     <BrowserRouter>
