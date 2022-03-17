@@ -81,3 +81,28 @@ It is possible to automatically run and test the backend in VSCode (after comple
 
 - In VSCode, go to the tab Run and Debug.
 - Press the green "play" button at the top of the Run and Debug menu.
+
+### Coverage
+
+There exists a possibility to generate a coverage report for the backend which can be viewed in your browser.
+
+- In the terminal in VSCode, cd to backend
+- Run
+
+```bash
+coverage run --source='.' manage.py test
+```
+
+This will run the tests automatically and generate coverage data.
+
+- Run
+
+```bash
+coverage html
+```
+
+- This will generate or update the folder called 'htmlcov' in backend.
+- Navigate to this folder and find the file named
+  'index.html'. Open this file in your browser.
+
+This will show the coverage report. Generally, we should not aim for 100% coverage, but rather a high degree. A lot of files are not necessary to test, but apps that we crate should be tested. A coverage of approx. 90% will be a very high degree of coverage.
