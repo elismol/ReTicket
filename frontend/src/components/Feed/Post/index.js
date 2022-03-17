@@ -1,16 +1,31 @@
-import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+// import { ChatIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  Center,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import PostModalWindow from "../../PostModal";
-import ProfileImage from "../../ProfileImage";
+import UserInfoImage from "../../UserInfoImage";
+import UserInfoModalWindow from "../../UserInfoModal";
 import { StyledBox } from "./style";
+import PostModalWindow from "../../PostModal";
 
 function Post({ post }) {
-  const [modalIsOpen, setModalState] = useState(false);
+  const [contactModalIsOpen, setContactModalState] = useState(false);
+  const [postModalIsOpen, setPostModalState] = useState(false);
+
   return (
-    <StyledBox isTraded={post.traded_with} onClick={() => setModalState(true)}>
-      {modalIsOpen && (
-        <PostModalWindow post={post} onClose={() => setModalState(false)} />
+    <StyledBox
+      isTraded={post.traded_with}
+      onClick={() => setPostModalState(true)}
+    >
+      {postModalIsOpen && (
+        <PostModalWindow post={post} onClose={() => setPostModalState(false)} />
       )}
       <HStack
         justifyContent="space-between"
@@ -20,29 +35,42 @@ function Post({ post }) {
         cursor="pointer"
       >
         <Box width="20%">
-          <ProfileImage userId={post.user} />
+          <Center w="100%" h="50%" color="white">
+            <UserInfoImage id={post.user} boxSize="50px" />
+          </Center>
         </Box>
         <Box w="70%">
-          <HStack justify="space-between">
-            <VStack alignItems="left" spacing={1}>
-              <Box>
-                <Heading size={4}>{post.event}</Heading>
-              </Box>
-              <Box>
-                <Heading size={5} fontSize="sm">
-                  {post.location}
-                </Heading>
-              </Box>
-              <Box>
-                <Text>Price: {post.price}</Text>
-              </Box>
-            </VStack>
-            {post.traded_with && (
-              <Box bg="#FF3434" p="3" color="white">
-                <Text fontSize="s">Sold</Text>
-              </Box>
-            )}
-          </HStack>
+          <VStack alignItems="left" spacing={1}>
+            <Box>
+              <Heading size={4}>{post.event}</Heading>
+            </Box>
+            <Box>
+              <Heading size={5} fontSize="sm">
+                {post.location}
+              </Heading>
+            </Box>
+            <Box>
+              <Text>Price: {post.price}</Text>
+            </Box>
+          </VStack>
+        </Box>
+        <Box w="25%">
+          {contactModalIsOpen && (
+            <UserInfoModalWindow
+              post={post}
+              onClose={() => setContactModalState(false)}
+            />
+          )}
+          {post.traded_with ? (
+            <Box bg="#FF3434" p="3" color="white">
+              <Text fontSize="s">Sold</Text>
+            </Box>
+          ) : (
+            <Button cursor="pointer" onClick={() => setContactModalState(true)}>
+              {" "}
+              Contact
+            </Button>
+          )}
         </Box>
       </HStack>
     </StyledBox>
