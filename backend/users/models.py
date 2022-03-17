@@ -19,3 +19,9 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     image = models.ImageField(
         _("Image"), upload_to='', default='default.jpg')
+
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    value = models.FloatField()
+    
+    

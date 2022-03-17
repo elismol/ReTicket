@@ -14,6 +14,7 @@ import {
 import UserInfo from "../../../components/UserInfo";
 import UserInfoImage from "../../../components/UserInfoImage";
 import { useCurrentUser } from "../../../contexts/UserInfoContext";
+import DisplayRating from "../../../components/DisplayRating";
 
 function ProfilePage() {
   const user = useCurrentUser();
@@ -75,6 +76,7 @@ function ProfilePage() {
               </LinkOverlay>
             </Box>
           </LinkBox>
+          {user && <DisplayRating userId={user.id} />}
         </Container>
       </VStack>
     </HStack>
