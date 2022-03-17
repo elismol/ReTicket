@@ -1,4 +1,4 @@
-import { AddIcon, ChatIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { AddIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
