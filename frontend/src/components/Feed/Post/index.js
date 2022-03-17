@@ -1,4 +1,3 @@
-import { ChatIcon } from "@chakra-ui/icons";
 import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { useState } from "react";
@@ -9,20 +8,22 @@ import { StyledBox } from "./style";
 function Post({ post }) {
   const [modalIsOpen, setModalState] = useState(false);
   return (
-    <>
+    <StyledBox isTraded={post.traded_with} onClick={() => setModalState(true)}>
       {modalIsOpen && (
         <PostModalWindow post={post} onClose={() => setModalState(false)} />
       )}
-      <StyledBox cursor="pointer" onClick={() => setModalState(true)}>
-        <HStack
-          justifyContent="space-between"
-          paddingTop="1em"
-          paddingBottom="1em"
-        >
-          <Box width="20%">
-            <ProfileImage userId={post.user} />
-          </Box>
-          <Box w="70%">
+      <HStack
+        justifyContent="space-between"
+        paddingTop="1em"
+        paddingBottom="1em"
+        paddingRight="1em"
+        cursor="pointer"
+      >
+        <Box width="20%">
+          <ProfileImage userId={post.user} />
+        </Box>
+        <Box w="70%">
+          <HStack justify="space-between">
             <VStack alignItems="left" spacing={1}>
               <Box>
                 <Heading size={4}>{post.event}</Heading>
@@ -36,13 +37,15 @@ function Post({ post }) {
                 <Text>Price: {post.price}</Text>
               </Box>
             </VStack>
-          </Box>
-          <Box w="10%">
-            <ChatIcon />
-          </Box>
-        </HStack>
-      </StyledBox>
-    </>
+            {post.traded_with && (
+              <Box bg="#FF3434" p="3" color="white">
+                <Text fontSize="s">Sold</Text>
+              </Box>
+            )}
+          </HStack>
+        </Box>
+      </HStack>
+    </StyledBox>
   );
 }
 
@@ -52,6 +55,7 @@ Post.propTypes = {
     location: PropTypes.string,
     price: PropTypes.number,
     user: PropTypes.number,
+    traded_with: PropTypes.number,
   }).isRequired,
 };
 

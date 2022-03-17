@@ -26,7 +26,6 @@ class PostViewSetTest(APITestCase):
             "price": 240,
             "description": "Testy",
             "user": user.pk,
-            "available": True,
             "location": "Hjemme",
         }
         response = self.client.post(self.list_create_url, data)
@@ -38,7 +37,6 @@ class PostViewSetTest(APITestCase):
             "post_type": "SELLING",
             "price": 240,
             "description": "Testy",
-            "available": True,
         }
         response = self.client.post(self.list_create_url, data)
         assert response.status_code == 400, f"Expected 400 but got {response.status_code}. Here is the data: {json.dumps(response.data, indent=4)}"
@@ -50,7 +48,6 @@ class PostViewSetTest(APITestCase):
             "price": 240,
             "description": "Testy",
             "user": user.pk,
-            "available": True,
         }
         response = self.client.post(self.list_create_url, data)
         assert response.status_code == 400, f"Expected 400 but got {response.status_code}. Here is the data: {json.dumps(response.data, indent=4)}"
@@ -62,7 +59,6 @@ class PostViewSetTest(APITestCase):
             "post_type": "SELLING",
             "price": "Not a number",
             "description": "Testy",
-            "available": True,
             "user": user.pk,
         }
         response = self.client.post(self.list_create_url, data)

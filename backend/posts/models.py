@@ -26,7 +26,9 @@ class Post(models.Model):
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, verbose_name='user')
 
-    available = models.BooleanField('available', default=True)
+    traded_with = models.ForeignKey(
+        "users.User", on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="traded_posts"
+    )
 
     location = models.CharField('location', max_length=255)
 

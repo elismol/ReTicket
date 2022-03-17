@@ -9,4 +9,4 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ['id', 'post_type', 'event', 'price',
-                  'description', 'user', 'available', 'location']
+                  'description', 'user', 'location','traded_with']

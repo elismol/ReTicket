@@ -14,5 +14,3 @@ class PostFactory(factory.django.DjangoModelFactory):
     description = factory.Sequence(lambda n: 'Description #%d' % n)
 
     location = factory.Sequence(lambda n: 'Location #%d' % n)
-
-    available = True
