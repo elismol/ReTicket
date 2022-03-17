@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { AddIcon, ChatIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import { BrowserRouter } from "react-router-dom";
 import { cleanup } from "@testing-library/react";
 import NavLink from "..";
