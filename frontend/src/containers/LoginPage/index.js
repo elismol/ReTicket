@@ -61,7 +61,7 @@ function LogIn() {
               >
                 <VStack spacing={5} align="stretch">
                   <Box>
-                    <Heading>Log in</Heading>
+                    <Heading>Log in </Heading>
                   </Box>
                   <Box>
                     <Heading size={5}>

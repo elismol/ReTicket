@@ -14,7 +14,7 @@ import {
   Stack,
   useColorModeValue,
   useDisclosure,
-  Text,
+  Image,
 } from "@chakra-ui/react";
 import React from "react";
 import { NavLink as ReactNavLink, useNavigate } from "react-router-dom";
@@ -47,7 +47,7 @@ export default function Header() {
         <HStack spacing={8} alignItems="center">
           <Box>
             <ReactNavLink to="/">
-              <Text color="white">Reticket</Text>
+              <Image boxSize="90px" src="/reticketLogo.png" />
             </ReactNavLink>
           </Box>
           <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
