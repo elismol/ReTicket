@@ -1,4 +1,4 @@
-from users.models import User
+from users.models import Rating, User
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 
@@ -10,6 +10,15 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'first_name', 'last_name', 'email', 'image']
+
+
+class RatingSerializer(serializers.ModelSerializer):
+    """
+    This serializer is used when getting or setting ratings.
+    """
+    class Meta:
+        model = Rating
+        fields = ['value']
 
 
 class CreateUserSerializer(serializers.ModelSerializer):

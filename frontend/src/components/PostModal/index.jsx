@@ -27,6 +27,7 @@ import postShape from "../../shapes/post";
 import { useFeedContext } from "../Feed/FeedContext";
 import PostForm from "../PostForm";
 import ProfileImage from "../ProfileImage";
+import SetRating from "../SetRating";
 import DeleteConfirmation from "./DeleteConfirmation";
 
 /**
@@ -129,6 +130,9 @@ function PostModalWindow({ post, onClose }) {
               <Box width="100%" bg="white" borderRadius="5px" padding="1em">
                 <Heading size={5}>Description: </Heading>
                 {post.description || "No description"}
+              </Box>
+              <Box bg="white" width="100%" padding="1em" borderRadius="5px">
+                <SetRating userId={post.user} />
               </Box>
             </VStack>
           )}

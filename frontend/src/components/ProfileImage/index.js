@@ -12,7 +12,11 @@ function ProfileImage({ userId, size = "sm" }) {
   }, []);
   return (
     <Center>
-      <Avatar size={size} src={userObj?.image} />
+      <Avatar
+        size={size}
+        src={userObj?.image}
+        name={`${userObj?.first_name} ${userObj?.last_name}`}
+      />
     </Center>
   );
 }
