@@ -21,7 +21,7 @@ function Post({ post }) {
 
   return (
     <StyledBox
-      isTraded={post.traded_with}
+      istraded={post.traded_with}
       onClick={() => setPostModalState(true)}
     >
       {postModalIsOpen && (
@@ -62,8 +62,10 @@ function Post({ post }) {
             />
           )}
           {post.traded_with ? (
-            <Box bg="#FF3434" p="3" color="white">
-              <Text fontSize="s">Sold</Text>
+            <Box as="button" bg="#FF3434" p="2" w="80%" borderRadius="7">
+              <Text fontSize="m" color="white">
+                Sold
+              </Text>
             </Box>
           ) : (
             <Button cursor="pointer" onClick={() => setContactModalState(true)}>

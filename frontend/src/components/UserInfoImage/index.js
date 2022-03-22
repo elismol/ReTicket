@@ -1,4 +1,4 @@
-import { Box, HStack, Image, VStack } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import React from "react";
@@ -16,12 +16,8 @@ function UserInfoImage({ id, boxSize }) {
     [id]
   );
   return (
-    <Box bg="#FFFFFF">
-      <HStack justifyContent="space-between">
-        <VStack justifyContent="space-between">
-          <Image borderRadius="full" boxSize={boxSize} src={user?.image} />
-        </VStack>
-      </HStack>
+    <Box>
+      <Image borderRadius="full" boxSize={boxSize} src={user?.image} />
     </Box>
   );
 }

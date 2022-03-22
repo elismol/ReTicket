@@ -52,7 +52,7 @@ function UserInfoModalWindow({ post, onClose }) {
             <Box width="100%">
               <HStack spacing={5} justify="space-between">
                 <Box>
-                  <UserInfoImage id={post.user} boxSize="150px" />
+                  <UserInfoImage id={post.user} boxSize="100px" />
                 </Box>
                 <Box bg="white" borderRadius="5px" padding="2em">
                   <HStack justify="space-between">
