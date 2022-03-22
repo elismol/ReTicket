@@ -63,7 +63,7 @@ export default function Header() {
                 cursor="pointer"
                 minW={0}
               >
-                <Avatar name={user?.first_name} size="sm" src={user?.image} />
+                <Avatar name={user?.first_name} size="sm" src={user.image} />
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={() => navigate("/profile-page")}>
