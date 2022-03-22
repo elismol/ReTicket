@@ -13,6 +13,9 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
     def get_queryset(self):
+        queryset = Post.objects.all()
+        if user := self.request.GET.get("user"):
+            queryset = queryset.filter(user=user)
         if post_type := self.request.GET.get("post_type"):
-            return Post.objects.filter(post_type=post_type)
-        return Post.objects.all()
+            queryset = queryset.filter(post_type=post_type)
+        return queryset

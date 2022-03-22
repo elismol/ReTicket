@@ -17,7 +17,7 @@ import Post from "./Post";
  * @param type Type is either SELLING or BYUING
  * @returns Returns a react element
  */
-function Feed({ type }) {
+function Feed({ type, user }) {
   // This state is used to store posts
   const [posts, setPosts] = React.useState(undefined);
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -25,10 +25,10 @@ function Feed({ type }) {
   React.useEffect(
     function getPosts() {
       axios
-        .get(`/posts/?post_type=${type}`)
+        .get(`/posts/?post_type=${type}&user=${user ?? ""}`)
         .then((response) => setPosts(response.data));
     },
-    [type]
+    [type, user]
   );
   // This function can be used to update a post in the posts state.
   // It is also passed to the FeedContext below, so that all sub components in the feed can call the function.
@@ -72,7 +72,7 @@ function Feed({ type }) {
   return (
     <Container overflowY="auto">
       {posts === undefined ? (
-        "Loading...."
+        "Loading..."
       ) : (
         <FeedContext.Provider value={contextValue}>
           <VStack spacing={4} align="stretch">
@@ -100,6 +100,11 @@ function Feed({ type }) {
 
 Feed.propTypes = {
   type: PropTypes.oneOf(["BUYING", "SELLING"]).isRequired,
+  user: PropTypes.oneOf([PropTypes.number, PropTypes.undefined]),
+};
+
+Feed.defaultProps = {
+  user: undefined,
 };
 
 export default Feed;
