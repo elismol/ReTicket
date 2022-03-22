@@ -35,7 +35,7 @@ function Post({ post }) {
         cursor="pointer"
       >
         <Box width="20%">
-          <Center w="100%" h="50%" color="white">
+          <Center w="100%" h="50%">
             <UserInfoImage id={post.user} boxSize="50px" />
           </Center>
         </Box>

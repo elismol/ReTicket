@@ -14,18 +14,22 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Select,
   Table,
   Tbody,
   Td,
   Tr,
   VStack,
+  Text,
 } from "@chakra-ui/react";
+import axios from "axios";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCurrentUser } from "../../contexts/UserInfoContext";
 import postShape from "../../shapes/post";
 import { useFeedContext } from "../Feed/FeedContext";
 import PostForm from "../PostForm";
+import { SELLING } from "../PostForm/constants";
 import ProfileImage from "../ProfileImage";
 import SetRating from "../SetRating";
 import DeleteConfirmation from "./DeleteConfirmation";
@@ -40,6 +44,11 @@ function PostModalWindow({ post, onClose }) {
   const feedContext = useFeedContext();
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
+  const [allUsers, setAllUsers] = useState();
+  const [selectedUser, selectUser] = useState();
+  useEffect(function getUsers() {
+    axios.get("/users/").then((response) => setAllUsers(response.data));
+  }, []);
   return (
     <Modal isOpen onClose={onClose} size="lg">
       <ModalOverlay />
@@ -131,9 +140,69 @@ function PostModalWindow({ post, onClose }) {
                 <Heading size={5}>Description: </Heading>
                 {post.description || "No description"}
               </Box>
-              <Box bg="white" width="100%" padding="1em" borderRadius="5px">
-                <SetRating userId={post.user} />
-              </Box>
+              {post.user === currentUser?.id && !post.traded_with && (
+                <Box width="100%" bg="white" borderRadius="5px" padding="1em">
+                  <Heading size={5}>
+                    Mark as{" "}
+                    {post.post_type === SELLING ? "sold to" : "bought from"}:
+                  </Heading>
+                  <HStack paddingTop="1">
+                    <Select
+                      onChange={(event) => selectUser(event.target.value)}
+                    >
+                      <option>--</option>
+                      {allUsers?.map((user) => (
+                        <option key={user.id} value={user.id}>
+                          {user.email}
+                        </option>
+                      ))}
+                    </Select>
+                    <Button
+                      disabled={!selectedUser}
+                      onClick={() =>
+                        axios
+                          .patch(`/posts/${post.id}/`, {
+                            traded_with: selectedUser,
+                          })
+                          .then((response) =>
+                            feedContext.onPostUpdate(response.data)
+                          )
+                      }
+                    >
+                      Submit
+                    </Button>
+                  </HStack>
+                </Box>
+              )}
+              {post.traded_with && post.user === currentUser?.id && (
+                <Box width="100%" bg="white" borderRadius="5px" padding="1em">
+                  <VStack align="start">
+                    <Box>
+                      {post.post_type === SELLING ? "Sold to" : "Bought from"}:{" "}
+                      {
+                        allUsers?.find((user) => user.id === post.traded_with)
+                          ?.email
+                      }
+                    </Box>
+                    <Box>
+                      <SetRating userId={post.traded_with} />
+                    </Box>
+                  </VStack>
+                </Box>
+              )}
+              {currentUser?.id === post.traded_with && (
+                <Box bg="white" width="100%" padding="1em" borderRadius="5px">
+                  <Text>
+                    You{" "}
+                    {post.post_type === SELLING
+                      ? "bought this ticket from"
+                      : "sold this ticket to"}{" "}
+                    {allUsers?.find((user) => user.id === post.user)?.email}.
+                  </Text>
+                  <Text>Leave a rating?</Text>
+                  <SetRating userId={post.user} />
+                </Box>
+              )}
             </VStack>
           )}
         </ModalBody>
