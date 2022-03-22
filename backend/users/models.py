@@ -20,8 +20,20 @@ class User(AbstractUser):
     image = models.ImageField(
         _("Image"), upload_to='', default='default.jpg')
 
+
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     value = models.FloatField()
-    
-    
+
+
+class Report(models.Model):
+    reported = models.ForeignKey(User, verbose_name="reported",
+                                 on_delete=models.CASCADE, related_name="received_reports")
+
+    reported_by = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name="created_reports")
+
+    description = models.TextField("reason for reporting")
+
+    def __str__(self) -> str:
+        return f"\"{self.reported}\" reported by \"{self.reported_by}\""
