@@ -68,8 +68,15 @@ function Post({ post }) {
               </Text>
             </Box>
           ) : (
-            <Button cursor="pointer" onClick={() => setContactModalState(true)}>
-              {" "}
+            <Button
+              cursor="pointer"
+              onClick={(e) => {
+                // Don't propagate, so that the onClick on the StyledBox element above is not called.
+                // This prevents the PostModalWindow from opening.
+                e.stopPropagation();
+                setContactModalState(true);
+              }}
+            >
               Contact
             </Button>
           )}
