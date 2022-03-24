@@ -51,6 +51,7 @@ function PostModalWindow({ post, onClose }) {
   useEffect(function getUsers() {
     axios.get("/users/").then((response) => setAllUsers(response.data));
   }, []);
+  const postedBy = allUsers?.find((user) => user.id === post.user);
   return (
     <Modal isOpen onClose={onClose} size="lg">
       <ModalOverlay />
@@ -102,6 +103,9 @@ function PostModalWindow({ post, onClose }) {
                 <HStack spacing={10} justify="space-between">
                   <Box>
                     <ProfileImage size="xl" userId={post.user} />
+                    <Text textAlign="center">
+                      {postedBy?.first_name} {postedBy?.last_name}
+                    </Text>
                   </Box>
                   <Box bg="white" borderRadius="5px" padding="1em">
                     <HStack justify="space-between">
@@ -213,17 +217,18 @@ function PostModalWindow({ post, onClose }) {
                   <SetRating userId={post.user} />
                 </Box>
               )}
+              <Button
+                colorScheme="red"
+                mr={8}
+                ml={8}
+                onClick={() => setReportModal(true)}
+                width="100%"
+              >
+                Report
+              </Button>
             </VStack>
           )}
         </ModalBody>
-        <Button
-          colorScheme="red"
-          mr={8}
-          ml={8}
-          onClick={() => setReportModal(true)}
-        >
-          Report
-        </Button>
         <ModalFooter>
           <Button colorScheme="teal" mr={3} onClick={onClose}>
             Close
