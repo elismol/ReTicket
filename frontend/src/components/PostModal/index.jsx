@@ -31,6 +31,7 @@ import { useFeedContext } from "../Feed/FeedContext";
 import PostForm from "../PostForm";
 import { SELLING } from "../PostForm/constants";
 import ProfileImage from "../ProfileImage";
+import ReportModalWindow from "../ReportModal";
 import SetRating from "../SetRating";
 import DeleteConfirmation from "./DeleteConfirmation";
 
@@ -41,6 +42,7 @@ import DeleteConfirmation from "./DeleteConfirmation";
  */
 function PostModalWindow({ post, onClose }) {
   const currentUser = useCurrentUser();
+  const [reportModal, setReportModal] = useState(false);
   const feedContext = useFeedContext();
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
@@ -77,6 +79,12 @@ function PostModalWindow({ post, onClose }) {
           <DeleteConfirmation
             postId={post.id}
             onClose={() => setDeleteMode(false)}
+          />
+        )}
+        {reportModal && (
+          <ReportModalWindow
+            reportedUserId={post.user}
+            onClose={() => setReportModal(false)}
           />
         )}
         <ModalBody padding="0 2em 2em">
@@ -208,6 +216,14 @@ function PostModalWindow({ post, onClose }) {
             </VStack>
           )}
         </ModalBody>
+        <Button
+          colorScheme="red"
+          mr={8}
+          ml={8}
+          onClick={() => setReportModal(true)}
+        >
+          Report
+        </Button>
         <ModalFooter>
           <Button colorScheme="teal" mr={3} onClick={onClose}>
             Close
