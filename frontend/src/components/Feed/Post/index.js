@@ -59,7 +59,7 @@ function Post({ post }) {
         <Box w="25%">
           {contactModalIsOpen && (
             <UserInfoModalWindow
-              post={post}
+              userId={post.user}
               onClose={() => setContactModalState(false)}
             />
           )}
