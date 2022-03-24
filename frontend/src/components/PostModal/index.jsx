@@ -151,11 +151,13 @@ function PostModalWindow({ post, onClose }) {
                       onChange={(event) => selectUser(event.target.value)}
                     >
                       <option>--</option>
-                      {allUsers?.map((user) => (
-                        <option key={user.id} value={user.id}>
-                          {user.email}
-                        </option>
-                      ))}
+                      {allUsers
+                        ?.filter((user) => user.id !== currentUser?.id)
+                        .map((user) => (
+                          <option key={user.id} value={user.id}>
+                            {user.email}
+                          </option>
+                        ))}
                     </Select>
                     <Button
                       disabled={!selectedUser}

@@ -1,4 +1,3 @@
-import { EditIcon } from "@chakra-ui/icons";
 import {
   Box,
   Container,
@@ -9,11 +8,11 @@ import {
   StackDivider,
   VStack,
 } from "@chakra-ui/react";
+import DisplayRating from "../../../components/DisplayRating";
 import Feed from "../../../components/Feed";
 import UserInfo from "../../../components/UserInfo";
-import UserInfoImage from "../../../components/UserInfoImage";
 import { useCurrentUser } from "../../../contexts/UserInfoContext";
-import DisplayRating from "../../../components/DisplayRating";
+import { BigProfileImage } from "./style";
 
 function ProfilePage() {
   const user = useCurrentUser();
@@ -68,10 +67,7 @@ function ProfilePage() {
         padding="1em"
       >
         <Container boxShadow="xs" p="5" centerContent>
-          <UserInfoImage id={user?.id} />
-          <Box>
-            Change profile picture <EditIcon />
-          </Box>
+          <BigProfileImage imageUrl={user?.image} />
           {user && <DisplayRating userId={user.id} />}
         </Container>
       </VStack>

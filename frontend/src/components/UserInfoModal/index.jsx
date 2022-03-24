@@ -17,9 +17,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React from "react";
 import PropTypes from "prop-types";
-import UserInfoImage from "../UserInfoImage";
+import React from "react";
+import ProfileImage from "../ProfileImage";
 import UserInfo from "../UserInfo";
 
 /**
@@ -52,7 +52,9 @@ function UserInfoModalWindow({ post, onClose }) {
             <Box width="100%">
               <HStack spacing={5} justify="space-between">
                 <Box>
-                  <UserInfoImage id={post.user} boxSize="100px" />
+                  <VStack>
+                    <ProfileImage userId={post.user} size="xl" />
+                  </VStack>
                 </Box>
                 <Box bg="white" borderRadius="5px" padding="2em">
                   <HStack justify="space-between">

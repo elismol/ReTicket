@@ -10,14 +10,16 @@ import {
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import UserInfoImage from "../../UserInfoImage";
+import { useCurrentUser } from "../../../contexts/UserInfoContext";
+import PostModalWindow from "../../PostModal";
+import ProfileImage from "../../ProfileImage";
 import UserInfoModalWindow from "../../UserInfoModal";
 import { StyledBox } from "./style";
-import PostModalWindow from "../../PostModal";
 
 function Post({ post }) {
   const [contactModalIsOpen, setContactModalState] = useState(false);
   const [postModalIsOpen, setPostModalState] = useState(false);
+  const user = useCurrentUser();
 
   return (
     <StyledBox
@@ -35,8 +37,8 @@ function Post({ post }) {
         cursor="pointer"
       >
         <Box width="20%">
-          <Center w="100%" h="50%">
-            <UserInfoImage id={post.user} boxSize="50px" />
+          <Center w="100%" h="50%" color="white">
+            <ProfileImage userId={post.user} size="md" />
           </Center>
         </Box>
         <Box w="70%">
@@ -68,17 +70,19 @@ function Post({ post }) {
               </Text>
             </Box>
           ) : (
-            <Button
-              cursor="pointer"
-              onClick={(e) => {
-                // Don't propagate, so that the onClick on the StyledBox element above is not called.
-                // This prevents the PostModalWindow from opening.
-                e.stopPropagation();
-                setContactModalState(true);
-              }}
-            >
-              Contact
-            </Button>
+            post.user !== user?.id && (
+              <Button
+                cursor="pointer"
+                onClick={(e) => {
+                  // Don't propagate, so that the onClick on the StyledBox element above is not called.
+                  // This prevents the PostModalWindow from opening.
+                  e.stopPropagation();
+                  setContactModalState(true);
+                }}
+              >
+                Contact
+              </Button>
+            )
           )}
         </Box>
       </HStack>

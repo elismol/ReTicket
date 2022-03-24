@@ -1,11 +1,11 @@
 import { AddIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
-  Avatar,
   Box,
   Button,
   Flex,
   HStack,
   IconButton,
+  Image,
   Menu,
   MenuButton,
   MenuDivider,
@@ -14,7 +14,6 @@ import {
   Stack,
   useColorModeValue,
   useDisclosure,
-  Image,
 } from "@chakra-ui/react";
 import React from "react";
 import { NavLink as ReactNavLink, useNavigate } from "react-router-dom";
@@ -22,6 +21,7 @@ import {
   useCurrentUser,
   useUserInfoContext,
 } from "../../contexts/UserInfoContext";
+import ProfileImage from "../ProfileImage";
 import NavLink from "./NavLink";
 
 const HeaderItems = [{ href: "/create-post", icon: AddIcon, text: "New post" }];
@@ -63,7 +63,7 @@ export default function Header() {
                 cursor="pointer"
                 minW={0}
               >
-                <Avatar name={user?.first_name} size="sm" src={user.image} />
+                <ProfileImage userId={user.id} />
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={() => navigate("/profile-page")}>
