@@ -2,7 +2,7 @@ from http.client import CREATED
 from math import ceil
 from django.http import Http404
 from django.shortcuts import render
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, serializers
 from rest_framework.response import Response
 from users.models import Rating
 from users.serializers import CreateUserSerializer, RatingSerializer, UserSerializer, LoginSerializer
@@ -73,7 +73,7 @@ class UserViewSet(mixins.CreateModelMixin,
         serializer.save(user_id=pk)
         return Response(serializer.data, status=CREATED)
 
-    @action(detail=True, serializer_class=None)
+    @action(detail=True, serializer_class=serializers.BaseSerializer)
     def rating(self, request, pk):
         ratings = Rating.objects.filter(
             user_id=pk).values_list("value", flat=True)
