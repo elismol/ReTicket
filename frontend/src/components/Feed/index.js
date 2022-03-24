@@ -54,6 +54,7 @@ function Feed({ type, user }) {
         )
       );
   }, []);
+
   // filteredPosts is a variable that contains the posts in the state filtered based on the search term.
   // The useMemo function ensures that we only regenerate this variable if the searchTerm or the posts state has changed.
   const filteredPosts = React.useMemo(

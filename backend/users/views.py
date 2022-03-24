@@ -5,7 +5,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, mixins, serializers
 from rest_framework.response import Response
 from users.models import Rating
-from users.serializers import CreateUserSerializer, RatingSerializer, UserSerializer, LoginSerializer
+from users.serializers import CreateUserSerializer, RatingSerializer, UserSerializer, LoginSerializer, CreateReportSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import action
 from django.contrib.auth import authenticate, login, logout
@@ -79,3 +79,10 @@ class UserViewSet(mixins.CreateModelMixin,
             user_id=pk).values_list("value", flat=True)
         avg_rating = ceil(sum(ratings)/len(ratings)) if len(ratings) else None
         return Response(avg_rating)
+
+    @action(detail=True, methods=["POST"], serializer_class=CreateReportSerializer)
+    def report(self, request, pk):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(reported_by=request.user, reported_id=pk)
+        return Response(serializer.data, status=CREATED)
