@@ -19,7 +19,8 @@ import {
 import axios from "axios";
 import PropTypes from "prop-types";
 import React from "react";
-import ProfileImage from "../ProfileImage";
+import { BigProfileImage } from "../../containers/ApplicationPage/ProfilePage/style";
+import DisplayRating from "../DisplayRating";
 import UserInfo from "../UserInfo";
 
 /**
@@ -27,7 +28,7 @@ import UserInfo from "../UserInfo";
  * @param onClose state of the modal
  * @returns modal containing user info to the corresponding post
  */
-function UserInfoModalWindow({ post, onClose }) {
+function UserInfoModalWindow({ userId, onClose }) {
   const [user, setUser] = React.useState(undefined);
 
   /**
@@ -35,17 +36,17 @@ function UserInfoModalWindow({ post, onClose }) {
    */
   React.useEffect(
     function getUser() {
-      axios
-        .get(`/users/${post.user}/`)
-        .then((response) => setUser(response.data));
+      axios.get(`/users/${userId}/`).then((response) => setUser(response.data));
     },
-    [post.user]
+    [userId]
   );
   return (
     <Modal isOpen onClose={onClose} size="lg">
       <ModalOverlay />
       <ModalContent bg="#efefef">
-        <ModalHeader>{post.event}</ModalHeader>
+        <ModalHeader>
+          {user?.first_name} {user?.last_name}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody padding="0 2em 2em">
           <VStack spacing={5}>
@@ -53,14 +54,10 @@ function UserInfoModalWindow({ post, onClose }) {
               <HStack spacing={5} justify="space-between">
                 <Box>
                   <VStack>
-                    <ProfileImage userId={post.user} size="xl" />
+                    <BigProfileImage imageUrl={user?.image} size="150px" />
                   </VStack>
                 </Box>
                 <Box bg="white" borderRadius="5px" padding="2em">
-                  <HStack justify="space-between">
-                    <Heading size={5}>{post.post_type}</Heading>
-                  </HStack>
-
                   <Table>
                     <Tbody>
                       <Tr>
@@ -70,6 +67,10 @@ function UserInfoModalWindow({ post, onClose }) {
                   </Table>
                 </Box>
               </HStack>
+            </Box>
+            <Box background="white" w="100%" borderRadius="5px" padding="1em">
+              <Heading size={4}>Rating</Heading>
+              <DisplayRating userId={userId} />
             </Box>
           </VStack>
         </ModalBody>
@@ -84,13 +85,7 @@ function UserInfoModalWindow({ post, onClose }) {
 }
 
 UserInfoModalWindow.propTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.number,
-    post_type: PropTypes.oneOf(["BUYING", "SELLING"]),
-    event: PropTypes.string,
-    user: PropTypes.number,
-  }).isRequired,
-
+  userId: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
