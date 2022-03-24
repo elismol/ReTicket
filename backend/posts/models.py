@@ -14,6 +14,9 @@ class Post(models.Model):
         (BUYING, "Buying"),
     ]
 
+    class Meta:
+        ordering = ["traded_with", "-id"]
+
     # The post_type field stores the type of the Post, and limits choices to POST_TYPES
     post_type = models.CharField('type', max_length=255, choices=POST_TYPES)
 
