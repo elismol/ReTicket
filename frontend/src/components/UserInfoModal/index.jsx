@@ -44,9 +44,7 @@ function UserInfoModalWindow({ userId, onClose }) {
     <Modal isOpen onClose={onClose} size="lg">
       <ModalOverlay />
       <ModalContent bg="#efefef">
-        <ModalHeader>
-          {user?.first_name} {user?.last_name}
-        </ModalHeader>
+        <ModalHeader>Contact information</ModalHeader>
         <ModalCloseButton />
         <ModalBody padding="0 2em 2em">
           <VStack spacing={5}>
